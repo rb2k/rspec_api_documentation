@@ -39,12 +39,12 @@ module RspecApiDocumentation
     def do_request(method, path, params, request_headers)
       raise "SUT_URL NOT SET" unless ENV['SUT_URL']
       uri = "#{ENV['SUT_URL'].chomp('/')}#{path}"
-      if ENV['HTTP_USERNAME'] && ENV['HTTP_PASSWORD']
-        @http_client.set_auth(ENV['SUT_URL'], ENV['HTTP_USERNAME'], ENV['HTTP_PASSWORD'])
+      if ENV['HTTP_USER'] && ENV['HTTP_PASS']
+        http_client.set_auth(nil, ENV['HTTP_USER'], ENV['HTTP_PASS'])
       end
-      puts "SETTING LAST REQUEST"
       self.last_request = OpenStruct.new(:env => {'rack.input' => StringIO.new("this should be the request body")})
-      self.last_response = http_client.request(method, uri, params, body = nil, request_headers)
+      resp = http_client.request(method, uri, params, body = nil, request_headers)
+      self.last_response = resp
     end
 
     private
