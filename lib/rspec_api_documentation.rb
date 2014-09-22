@@ -24,6 +24,7 @@ module RspecApiDocumentation
   autoload :DSL
   autoload :RackTestClient
   autoload :OAuth2MACClient, "rspec_api_documentation/oauth2_mac_client"
+  autoload :ProxyClient, "rspec_api_documentation/proxy_client"
   autoload :TestServer
   autoload :Curl
 
